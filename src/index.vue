@@ -185,22 +185,18 @@
             };
         },
         watch: {
-            areaIds(val) {
-                // 初始化未完成的情况下，接收到父组件传值后，调用初始化方法。
-                if (this.initState == false) {
-                    this.initData();
-                }
-            },
             areaList (val) {
                 this.area_data = this.areaList;
                 this.pro.data = this.areaList;
+                if (this.initState == false) {
+                    this.initData();
+                }
             }
         },
         methods: {
             initData() {
                 // 若此刻父组件未将areaIds传递过来，不进行初始化。待watch监控到areaIds有值时，会主动调用初始化，标记为初始化已完成。
                 if (this.areaIds) {
-                    console.log('-----------');
                     let ids = this.areaIds.split(",");
                     let _pro = this.pro.data.filter(item => item.id == ids[0]);
                     if (_pro.length) {
@@ -226,7 +222,7 @@
                                     this.dis.data = _city[0].subcat;
                                 }
                             }
-                            this.$emit("areaDone", {
+                            this.$emit("selected", {
                                 pro: this.pro,
                                 city: index_id == 1 ? this.city : {},
                                 dis: index_id == 1 ? this.dis : this.city
@@ -273,7 +269,7 @@
                         this.active_index = 3;
                     } else {
                         this.is_show_dis = false;
-                        this.$emit("areaDone", {pro: this.pro, city: {}, dis: this.city});
+                        this.$emit("selected", {pro: this.pro, city: {}, dis: this.city});
                     }
                 }
             },
@@ -287,11 +283,6 @@
             closeFn() {
                 this.isShow = false;
             }
-        },
-        created() {
-            this.$nextTick(() => {
-                this.initData();
-            });
         }
     };
 </script>
