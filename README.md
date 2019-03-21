@@ -1,6 +1,6 @@
 # vue-area
-移动端选择地址组件
-![](//cdn.51talk.com/apollo/images/6ec0e8ad944157a52e0368657ec84bf2.png//cdn.51talk.com/apollo/images/f2887eafaa0c6386a85ef838c5936558.png)
+#### 移动端选择地址组件
+![](//cdn.51talk.com/apollo/images/6ec0e8ad944157a52e0368657ec84bf2.png)
 ## install
 NPM
 ```
