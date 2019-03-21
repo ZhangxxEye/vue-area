@@ -1,20 +1,19 @@
 {
-  "name": "nat-vue-list",
+  "name": "@nat/vue-area",
   "version": "1.0.0",
   "author": "ZhangxxEye",
   "license": "MIT",
-  "description": "滚动加载，用于展示长列表，当列表即将滚动到底部时，会触发事件并加载更多列表项",
+  "description": "移动端选择地址组件",
   "homepage": "",
   "private": false,
   "keywords": [
     "javascript",
     "vue",
-    "list",
-    "lazyload"
+    "vue-area"
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:ZhangxxEye/vue-list.git"
+    "url": "git@github.com:ZhangxxEye/vue-area.git"
   },
   "main": "dist/index.js",
   "scripts": {

@@ -145,6 +145,7 @@
 <script>
     import '../src/common/css/reset.css';
     export default {
+        name: 'vue-area',
         props: {
             areaList: {
                 type: Array
