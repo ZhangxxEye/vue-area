@@ -1,19 +1,16 @@
 <template lang="html">
     <div id="project-features">
-        <h1 class="title">vue-list</h1>
+        <h1 class="title">地区</h1>
         <div class="features">
-            <list @load="onLoad" v-model="loading" :finished="finished" loading-text="加载中..." finished-text="没有更多了" :error.sync="error" error-text="加载失败,点击重新加载">
-                <ul>
-                    <li v-for="item in list">{{item}}</li>
-                </ul>
-            </list>
+            <vue-area :area-list="areaList" @selected="select"></vue-area>
         </div>
     </div>
 </template>
 
 <script>
-    import list from '../../src/index';
-    import axois from 'axios';
+    import area from '../../src/index';
+    import { request } from "axios-add-jsonp";
+
     export default {
         name: 'ProjectFeatures',
         data() {
@@ -21,46 +18,33 @@
                 list: [],
                 loading: false,
                 finished: false,
-                error: false
+                error: false,
+                showArea: true,
+                area: {
+                    areaIds: "",
+                    pro: "选择省",
+                    city: "市",
+                    dis: "区/县"
+                },
+                areaList: []
             };
         },
         components: {
-            list,
+            'vue-area': area,
         },
         mounted () {
+            request.jsonp('//home.51talk.com/ajax/treeList').then(res => {
+                if (res.status == 1) {
+                    this.areaList = JSON.parse(res.data);
+                }
+            });
         },
         methods: {
-            handleClick (value) {
-                console.log('selected', value);
+            closeAreaFn() {
+                this.showArea = false;
             },
-            getLists () {
-                axois.get('http://172.16.0.45:7300/mock/5c88c2241d2cb328eddca711/components/api/list').then(r => {
-                    this.list.push(...r.data.data);
-                    if (this.list.length >= 90) {
-                        this.finished = true;
-                    }
-                }).catch(e => {
-                    this.error = true;
-                }).finally(() => {
-                    this.loading = false;
-                });
-            },
-            onLoad() {
-                this.getLists();
-                // 异步更新数据
-                /*setTimeout(() => {
-                    for (let i = 0; i < 10; i++) {
-                        this.list.push(this.list.length + 1);
-                    }
-                    // 加载状态结束
-                    // this.loading = false;
-                    this.error = true;
-
-                    // 数据全部加载完成
-                    if (this.list.length >= 90) {
-                        this.finished = true;
-                    }
-                }, 500);*/
+            select (val) {
+               console.log('-------', val);
             }
         }
     };
@@ -141,7 +125,6 @@
         font-size: 23px;
         font-weight: bold;
         font-family: 'Raleway', sans-serif;
-        color: #fff;
         margin-bottom: 20px
     }
 
