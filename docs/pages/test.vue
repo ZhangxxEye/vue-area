@@ -2,7 +2,7 @@
     <div id="project-features">
         <h1 class="title">地区</h1>
         <div class="features">
-            <vue-area :area-ids="areaIds" :area-list="areaList" @selected="select"></vue-area>
+            <vue-area v-model="isShow" :area-ids="areaIds" :area-list="areaList" @selected="select"></vue-area>
         </div>
     </div>
 </template>
@@ -27,7 +27,8 @@
                     dis: "区/县"
                 },
                 areaList: [],
-                areaIds: ''
+                areaIds: '',
+                isShow: true
             };
         },
         components: {

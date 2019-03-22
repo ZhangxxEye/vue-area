@@ -98,7 +98,7 @@
                 overflow: hidden;
                 white-space: nowrap;
                 text-overflow: ellipsis;
-
+                font-size: 0;
                 .sel {
                     font-size: 16px;
                     margin-right: 25px;
@@ -146,6 +146,9 @@
     import '../src/common/css/reset.css';
     export default {
         name: 'vue-area',
+        model: {
+            prop: 'isShow'
+        },
         props: {
             areaList: {
                 type: Array
@@ -153,11 +156,15 @@
             areaIds: {
                 default: "",
                 type: String
+            },
+            isShow: {
+                type: Boolean,
+                default: false
             }
         },
         data() {
             return {
-                isShow: true,
+                // isShow: true,
                 area_data: [],
                 cur_data: [],
                 active_index: 1,
@@ -279,10 +286,11 @@
                 this.dis.name = obj.name;
                 this.active_index = 3;
                 this.$emit("selected", {pro: this.pro, city: this.city, dis: this.dis});
-                this.isShow = false;
+                // this.isShow = false;
+                this.$emit('input', false);
             },
             closeFn() {
-                this.isShow = false;
+                this.$emit('input', false);
             }
         }
     };

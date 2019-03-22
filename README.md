@@ -11,7 +11,7 @@ npm install @nat/vue-area
  <div id="project-features">
         <h1 class="title">地区</h1>
         <div class="features">
-            <vue-area :area-ids="areaIds" :area-list="areaList" @selected="select"></vue-area>
+            <vue-area v-model="isShow" :area-ids="areaIds" :area-list="areaList" @selected="select"></vue-area>
         </div>
     </div>
 ```
@@ -20,6 +20,9 @@ npm install @nat/vue-area
     import area from '@nat/vue-area';
 
     export default {
+        data () {
+            isShow: false
+        },
         components: {
             area
         }
@@ -30,6 +33,7 @@ npm install @nat/vue-area
 #### props
 属性 | 说明 | 类型 | 默认值
 ---|---|---|---
+isShow | 是否显示地址列表，v-model指令绑定属性 | Boolean | false
 areaList | 地区列表(数据格式下文给出) | Array | []
 areaIds | 初始化选择的地区值(以逗号分隔的id值，例如："110000,110100,110101") | String | []
 #### areaList的数据格式
